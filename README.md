@@ -32,9 +32,9 @@ cd myproject
 
 2. Set up your database:
 ```bash
-flask db init
-flask db migrate
-flask db upgrade
+flails db init
+flails db migrate
+flails db upgrade
 ```
 
 3. Run the development server:
@@ -47,8 +47,8 @@ flask run
 Flails uses environment variables for configuration. Create a `.env` file in your project root:
 
 ```env
-FLASK_APP=app
-FLASK_ENV=development
+FLAILS_APP=app
+FLAILS_ENV=development
 SECRET_KEY=your-secret-key
 DATABASE_URL=postgresql://localhost/your_database
 ```
