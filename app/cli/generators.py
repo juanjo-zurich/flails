@@ -1,4 +1,5 @@
 import os
+import shutil
 import click
 from jinja2 import Environment, FileSystemLoader
 
@@ -60,9 +61,6 @@ def new(app_name, db_type):
         'app/templates/welcome.html': 'app/templates/welcome.html',
         'app/static/css/bootstrap.min.css.template': 'app/static/css/bootstrap.min.css',
     }
-    
-    for template, destination in templates.items():
-        create_file_from_template(template, {'app_name': app_name}, os.path.join(base_dir, destination))
     
     # Copy Bootstrap assets
     try:
