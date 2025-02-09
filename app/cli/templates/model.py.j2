@@ -1,0 +1,44 @@
+from app import db
+from datetime import datetime
+from sqlalchemy.dialects.postgresql import JSON
+
+class {{ name }}(db.Model):
+    __tablename__ = '{{ name.lower() }}s'
+
+    id = db.Column(db.Integer, primary_key=True)
+    {% for field in fields %}
+    {% if field.type == 'string' %}
+    {{ field.name }} = db.Column(db.String(255){% if field.unique %}, unique=True{% endif %}{% if field.nullable %}, nullable=True{% endif %}{% if field.index %}, index=True{% endif %})
+    {% elif field.type == 'text' %}
+    {{ field.name }} = db.Column(db.Text{% if field.unique %}, unique=True{% endif %}{% if field.nullable %}, nullable=True{% endif %}{% if field.index %}, index=True{% endif %})
+    {% elif field.type == 'integer' %}
+    {{ field.name }} = db.Column(db.Integer{% if field.unique %}, unique=True{% endif %}{% if field.nullable %}, nullable=True{% endif %}{% if field.index %}, index=True{% endif %})
+    {% elif field.type == 'float' %}
+    {{ field.name }} = db.Column(db.Float{% if field.unique %}, unique=True{% endif %}{% if field.nullable %}, nullable=True{% endif %}{% if field.index %}, index=True{% endif %})
+    {% elif field.type == 'decimal' %}
+    {{ field.name }} = db.Column(db.Decimal(10, 2){% if field.unique %}, unique=True{% endif %}{% if field.nullable %}, nullable=True{% endif %}{% if field.index %}, index=True{% endif %})
+    {% elif field.type == 'boolean' %}
+    {{ field.name }} = db.Column(db.Boolean, default=False{% if field.unique %}, unique=True{% endif %}{% if field.nullable %}, nullable=True{% endif %}{% if field.index %}, index=True{% endif %})
+    {% elif field.type == 'datetime' %}
+    {{ field.name }} = db.Column(db.DateTime, default=datetime.utcnow{% if field.unique %}, unique=True{% endif %}{% if field.nullable %}, nullable=True{% endif %}{% if field.index %}, index=True{% endif %})
+    {% elif field.type == 'date' %}
+    {{ field.name }} = db.Column(db.Date{% if field.unique %}, unique=True{% endif %}{% if field.nullable %}, nullable=True{% endif %}{% if field.index %}, index=True{% endif %})
+    {% elif field.type == 'time' %}
+    {{ field.name }} = db.Column(db.Time{% if field.unique %}, unique=True{% endif %}{% if field.nullable %}, nullable=True{% endif %}{% if field.index %}, index=True{% endif %})
+    {% elif field.type == 'json' %}
+    {{ field.name }} = db.Column(JSON{% if field.unique %}, unique=True{% endif %}{% if field.nullable %}, nullable=True{% endif %}{% if field.index %}, index=True{% endif %})
+    {% elif field.type == 'binary' %}
+    {{ field.name }} = db.Column(db.LargeBinary{% if field.unique %}, unique=True{% endif %}{% if field.nullable %}, nullable=True{% endif %}{% if field.index %}, index=True{% endif %})
+    {% elif field.type == 'foreignkey' %}
+    {{ field.name }}_id = db.Column(db.Integer, db.ForeignKey('{{ field.name }}s.id'){% if field.nullable %}, nullable=True{% endif %})
+    {{ field.name }} = db.relationship('{{ field.name|capitalize }}')
+    {% endif %}
+    {% endfor %}
+
+    def __init__(self{% for field in fields %}, {{ field.name }}=None{% endfor %}):
+        {% for field in fields %}
+        self.{{ field.name }} = {{ field.name }}
+        {% endfor %}
+
+    def __repr__(self):
+        return f'<{{ name }} {self.id}>'

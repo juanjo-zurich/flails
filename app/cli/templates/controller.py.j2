@@ -1,0 +1,44 @@
+from flask import render_template, redirect, url_for, flash, request
+from app import db
+from app.models.{{ name.lower() }} import {{ name }}
+from . import bp
+
+@bp.route('/{{ name.lower() }}s')
+def index():
+    """List all {{ name.lower() }}s"""
+    items = {{ name }}.query.all()
+    return render_template('{{ name.lower() }}/index.html', items=items)
+
+@bp.route('/{{ name.lower() }}s/<int:id>')
+def show(id):
+    """Show a specific {{ name.lower() }}"""
+    item = {{ name }}.query.get_or_404(id)
+    return render_template('{{ name.lower() }}/show.html', item=item)
+
+@bp.route('/{{ name.lower() }}s/new', methods=['GET', 'POST'])
+def new():
+    """Create a new {{ name.lower() }}"""
+    if request.method == 'POST':
+        # Add your creation logic here
+        flash('{{ name }} created successfully')
+        return redirect(url_for('.index'))
+    return render_template('{{ name.lower() }}/new.html')
+
+@bp.route('/{{ name.lower() }}s/<int:id>/edit', methods=['GET', 'POST'])
+def edit(id):
+    """Edit a specific {{ name.lower() }}"""
+    item = {{ name }}.query.get_or_404(id)
+    if request.method == 'POST':
+        # Add your update logic here
+        flash('{{ name }} updated successfully')
+        return redirect(url_for('.show', id=id))
+    return render_template('{{ name.lower() }}/edit.html', item=item)
+
+@bp.route('/{{ name.lower() }}s/<int:id>/delete', methods=['POST'])
+def delete(id):
+    """Delete a specific {{ name.lower() }}"""
+    item = {{ name }}.query.get_or_404(id)
+    db.session.delete(item)
+    db.session.commit()
+    flash('{{ name }} deleted successfully')
+    return redirect(url_for('.index'))
