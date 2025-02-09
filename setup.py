@@ -8,9 +8,10 @@ setup(
     package_data={
         'app': ['cli/templates/**/*']
     },
+    python_requires='>=3.9',
     install_requires=[
         'Click>=8.1.7',
-        'Flask>=3.0.0',
+        'Flask>=3.1.0,<3.2.0',
         'Flask-SQLAlchemy>=3.1.1',
         'Flask-Login>=0.6.3',
         'Flask-WTF>=1.2.1',
@@ -19,9 +20,11 @@ setup(
         'email-validator>=2.1.0',
         'python-dotenv>=1.0.0',
         'Werkzeug>=3.0.1',
-        'SQLAlchemy>=2.0.23',
-        'psycopg2-binary>=2.9.9'
+        'SQLAlchemy>=2.0.23'
     ],
+    extras_require={
+        'postgresql': ['psycopg2-binary>=2.9.9']
+    },
     entry_points={
         'console_scripts': [
             'flails=flails:cli'

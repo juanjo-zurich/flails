@@ -4,17 +4,16 @@ Flails is a Python web application framework built on top of Flask, providing a 
 
 ## Features
 
-- Built on Flask 3.0.0
+- Built on Flask 3.1.x
 - Integrated authentication system
 - Admin interface using Flask-Admin
 - Database integration with SQLAlchemy
 - CLI tools for project scaffolding
-- PostgreSQL support out of the box
+- SQLite as default database with optional PostgreSQL support
 
 ## Requirements
 
-- Python 3.x
-- PostgreSQL
+- Python 3.9 or higher
 
 ## Installation
 
@@ -39,7 +38,7 @@ flails db upgrade
 
 3. Run the development server:
 ```bash
-flask run
+flails run
 ```
 
 ## Configuration
@@ -50,7 +49,7 @@ Flails uses environment variables for configuration. Create a `.env` file in you
 FLAILS_APP=app
 FLAILS_ENV=development
 SECRET_KEY=your-secret-key
-DATABASE_URL=postgresql://localhost/your_database
+DATABASE_URL=sqlite:///app.db  # Optional: postgresql://localhost/your_database
 ```
 
 ## Project Structure

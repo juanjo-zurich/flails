@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Flails</title>
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body p-5">
+                        <h1 class="display-4 text-center mb-4">Welcome to Flails</h1>
+                        <div class="alert alert-success">
+                            <h4 class="alert-heading">🎉 Congratulations!</h4>
+                            <p>Your Flails application is now running successfully.</p>
+                        </div>
+                        
+                        <h2 class="h4 mb-3">Quick Start Guide</h2>
+                        <div class="list-group mb-4">
+                            <div class="list-group-item">
+                                <h5 class="mb-1">Create Models</h5>
+                                <p class="mb-0">Define your database models in <code>app/models/</code></p>
+                            </div>
+                            <div class="list-group-item">
+                                <h5 class="mb-1">Set Up Database</h5>
+                                <p class="mb-0">Run migrations with <code>flails db migrate</code></p>
+                            </div>
+                            <div class="list-group-item">
+                                <h5 class="mb-1">Create Views</h5>
+                                <p class="mb-0">Add your routes and views in a new blueprint</p>
+                            </div>
+                        </div>
+
+                        <h2 class="h4 mb-3">Project Structure</h2>
+                        <div class="bg-light p-3 rounded mb-4">
+                            <pre class="mb-0"><code>myproject/
+├── app/
+│   ├── models/
+│   ├── templates/
+│   ├── static/
+│   └── views/
+├── config.py
+└── requirements.txt</code></pre>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <p class="text-muted">You can modify this page by editing <code>app/templates/welcome.html</code></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>
