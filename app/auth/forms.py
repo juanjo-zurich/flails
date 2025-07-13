@@ -20,7 +20,7 @@ class RegistrationForm(FlaskForm):
     ])
     password = PasswordField('Password', validators=[
         DataRequired(),
-        Length(min=6)
+        Length(min=8, message='Password must be at least 8 characters long.'),
     ])
     password2 = PasswordField('Repeat Password', validators=[
         DataRequired(),

@@ -8,10 +8,11 @@ class SecureModelView(ModelView):
         return current_user.is_authenticated and current_user.is_admin
 
 class UserAdmin(SecureModelView):
-    column_list = ['username', 'email', 'is_admin', 'is_active']
+    column_list = ['username', 'email', 'role', 'is_active']
     column_searchable_list = ['username', 'email']
-    column_filters = ['is_admin', 'is_active']
+    column_filters = ['role', 'is_active']
     form_excluded_columns = ['password_hash']
+    page_size = 20
 
 def init_admin(app):
     admin.add_view(UserAdmin(User, db.session))
