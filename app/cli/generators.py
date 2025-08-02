@@ -9,6 +9,8 @@ def create_directory_if_not_exists(path):
 
 def create_file_from_template(template_name, context, output_path):
     env = Environment(loader=FileSystemLoader('app/cli/templates'))
+    # Mock url_for for template generation
+    env.globals['url_for'] = lambda *args, **kwargs: ''
     template = env.get_template(template_name)
     content = template.render(**context)
     
@@ -95,10 +97,10 @@ def new(app_name, db_type):
     click.echo('  python -m venv venv')
     click.echo('  source venv/bin/activate  # On Windows: venv\\Scripts\\activate')
     click.echo('  pip install -r requirements.txt')
-    click.echo('  flails db init')
-    click.echo('  flails db migrate')
-    click.echo('  flails db upgrade')
-    click.echo('  flails run')
+    click.echo('  flask db init')
+    click.echo('  flask db migrate')
+    click.echo('  flask db upgrade')
+    click.echo('  flask run')
 
 @generate.command()
 @click.argument('name')

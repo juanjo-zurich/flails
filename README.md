@@ -31,14 +31,14 @@ cd myproject
 
 2. Set up your database:
 ```bash
-flails db init
-flails db migrate
-flails db upgrade
+flask db init
+flask db migrate
+flask db upgrade
 ```
 
 3. Run the development server:
 ```bash
-flails run
+flask run
 ```
 
 ## Configuration
